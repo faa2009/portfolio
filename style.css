@@ -1,0 +1,441 @@
+/* ==========================================================================
+   1. RESET, TIPOGRAFI & VARIABEL GLOBAL (MENGEMBALIKAN TEMA GELAP)
+   ========================================================================== */
+:root {
+    --bg-dark: #070708;
+    --card-dark: #121214;
+    --border-color: #222226;
+    --accent-blue: #2563eb;
+    --accent-glow: rgba(37, 99, 235, 0.15);
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Sembunyikan default kursor di desktop untuk custom cursor */
+@media (min-width: 992px) {
+    body, a, button, input {
+        cursor: none !important;
+    }
+}
+
+/* ==========================================================================
+   2. PRELOADER & KURSOR KUSTOM
+   ========================================================================== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+}
+.preloader-content { text-align: center; }
+.preloader-logo { font-size: 3.5rem; font-weight: 700; letter-spacing: 0.3em; margin-bottom: 1.5rem; color: var(--text-main); }
+.preloader-track { width: 200px; height: 2px; background: var(--border-color); border-radius: 2px; overflow: hidden; margin: 0 auto; }
+.preloader-bar { width: 0%; height: 100%; background: var(--text-main); transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1); }
+
+.custom-cursor {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-main);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 999999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+.custom-cursor.grow { width: 45px; height: 45px; background-color: transparent; border: 1px solid var(--text-main); }
+
+/* ==========================================================================
+   3. NAVBAR & TOMBOL UTAMA
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 8%;
+    background-color: rgba(7, 7, 8, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 999;
+    border-bottom: 1px solid var(--border-color);
+    transform: translateY(-100%);
+    opacity: 0;
+}
+.nav-logo { 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    letter-spacing: -0.02em; 
+    color: var(--text-main); 
+    /* Transisi super smooth menggunakan cubic-bezier */
+    transition: letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+/* Efek saat kursor berada di atas nama */
+.nav-logo:hover {
+    letter-spacing: 0.04em; /* Teks meregang sedikit secara elegan */
+    color: #ffffff; /* Warna putihnya menjadi lebih tegas/terang */
+}
+
+.nav-logo span { 
+    color: var(--accent-blue); 
+    display: inline-block;
+    /* Transisi untuk titik biru */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+/* Efek khusus untuk titik biru saat logo di-hover */
+.nav-logo:hover span { 
+    transform: scale(1.4) translateY(-1px); /* Titik membesar dan naik sedikit */
+    filter: drop-shadow(0 0 8px var(--accent-blue)); /* Efek neon glow premium yang tipis */
+}
+.nav-links a { text-decoration: none; color: var(--text-muted); margin-right: 2.5rem; font-size: 0.95rem; font-weight: 500; transition: var(--transition-smooth); }
+.nav-links a:hover { color: var(--text-main); }
+
+.btn { display: inline-block; padding: 0.9rem 2rem; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: var(--transition-smooth); border: none; }
+.btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+.btn-primary { background-color: var(--text-main); color: var(--bg-dark); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05); }
+.btn-secondary { background-color: transparent; color: var(--text-main); border: 1px solid var(--border-color); margin-left: 1rem; }
+.btn-secondary:hover { border-color: var(--text-main); background-color: rgba(255, 255, 255, 0.02); }
+
+/* ==========================================================================
+   4. HERO LENGKAP & KONSTRUKSI KANAN WORKSPACE 3D (EFEK SMOOTH & RAPI)
+   ========================================================================== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    padding-top: 80px;
+    position: relative;
+}
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+}
+.hero-badge { display: inline-block; padding: 0.4rem 1rem; background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 50px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.hero-content h1 { font-size: 4rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; color: var(--text-main); }
+.hero-content h1 span { color: var(--accent-blue); }
+.hero-content p { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2.5rem; max-width: 600px; }
+.seq-item { opacity: 0; transform: translateY(20px); }
+
+/* Kontainer Sisi Visual Kanan */
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1800px; /* Perspektif 3D Solid */
+    width: 100%;
+    height: 550px;
+}
+
+.workspace-3d {
+    position: relative;
+    width: 100%;
+    max-width: 480px; /* Mengunci lebar maksimal agar kartu tidak melebar liar */
+    height: 480px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Layer pembungkus pergerakan kursor (Parallax Engine) */
+.layer {
+    position: absolute;
+    transform-style: preserve-3d;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Klik kursor bisa menembus kontainer luar */
+}
+
+/* Background Efek Latar Belakang */
+.bg-layer { z-index: 1; }
+.subtle-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 24px 24px;
+    border-radius: 24px;
+}
+.mesh-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(37, 99, 236, 0.16) 0%, rgba(7, 7, 8, 0) 70%);
+    filter: blur(30px);
+}
+.noise-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Glass Backdrop Layer Belakang Foto */
+.glass-layer-back { z-index: 2; }
+.glass-backdrop {
+    width: 340px;
+    height: 340px;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 32px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+/* Sentral Foto Profil Lingkaran */
+.profile-layer { z-index: 5; }
+.profile-avatar-premium {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1e293b 0%, #090d16 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--text-main);
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(37, 99, 235, 0.1);
+    animation: floatProfile 10s ease-in-out infinite;
+    transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.profile-avatar-premium:hover {
+    transform: scale(1.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(37, 99, 235, 0.25);
+}
+.glass-reflection {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%);
+}
+@keyframes floatProfile {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Spesifikasi Komponen Objek Tech Cards */
+.tech-card {
+    position: absolute; /* Mengunci posisi mutlak di titik koordinat kontainer */
+    pointer-events: auto;
+    background: rgba(18, 18, 20, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.65rem 1.1rem;
+    border-radius: 20px; /* Radius Sesuai Request */
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-main);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    
+    /* Animasi Melayang Independen Perlahan */
+    animation: floatingSpecs 10s ease-in-out infinite;
+    animation-delay: var(--card-delay);
+    transition: border-color 300ms ease, box-shadow 300ms ease, margin-top 300ms ease, background-color 300ms ease;
+}
+.tech-card .card-icon {
+    font-size: 1.1rem;
+    transition: transform 300ms ease;
+}
+
+/* Efek Hover Mikro Interaksi Tanpa Menabrak Transform JS */
+.tech-card:hover {
+    background: rgba(24, 24, 28, 0.7);
+    border-color: var(--accent-blue);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.2);
+    margin-top: -8px; /* Naik 8px dengan mulus */
+}
+.tech-card:hover .card-icon {
+    transform: scale(1.2);
+}
+@keyframes floatingSpecs {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* SISTEM KOORDINAT INSTAN ASIMETRIS (RAPI & TIDAK BERDEMPETAN) */
+.pos-card-1 .tech-card { top: 6%; left: 35%; }    /* HTML5 */
+.pos-card-2 .tech-card { top: 20%; left: -2%; }    /* Laravel */
+.pos-card-3 .tech-card { top: 16%; right: -2%; }   /* Flutter */
+.pos-card-4 .tech-card { top: 36%; right: -12%; }  /* MySQL */
+.pos-card-5 .tech-card { top: 40%; left: -14%; }   /* Git */
+.pos-card-6 .tech-card { bottom: 20%; left: -2%; }  /* CSS3 */
+.pos-card-7 .tech-card { bottom: 4%; left: 14%; }   /* Responsive */
+.pos-card-8 .tech-card { top: 58%; right: -10%; }  /* GitHub */
+.pos-card-9 .tech-card { bottom: 20%; right: -4%; } /* REST API */
+.pos-card-10 .tech-card { bottom: 4%; right: 28%; }/* JavaScript */
+.pos-card-11 .tech-card { top: -4%; left: 5%; }    /* PHP */
+.pos-card-12 .tech-card { top: 60%; left: -6%; }   /* UI/UX */
+
+/* ==========================================================================
+   5. LAYOUT UTILITY UTAMA & SECTION LAINNYA (KEMBALI UTUH)
+   ========================================================================== */
+section { padding: 8rem 8%; }
+.section-header { margin-bottom: 4rem; }
+.section-header.text-center { text-align: center; }
+.section-tag { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-blue); display: block; margin-bottom: 0.75rem; font-weight: 600; }
+.section-header h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-main); }
+
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; }
+
+.premium-card { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 2.5rem 2rem; border-radius: 8px; transition: var(--transition-smooth); }
+.premium-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.card-icon { font-size: 1.8rem; margin-bottom: 1.5rem; }
+.premium-card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 600; }
+.premium-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+.compact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+.attribute-pill { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 1rem; border-radius: 6px; font-size: 0.95rem; font-weight: 500; transition: var(--transition-smooth); text-align: center; }
+.attribute-pill:hover { background-color: #16161a; border-color: var(--text-muted); }
+
+/* Keahlian / Skills Grid */
+.learning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.skill-card { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; position: relative; overflow: hidden; }
+.skill-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.skill-info h4 { font-size: 1.1rem; font-weight: 600; }
+.mastery { font-size: 0.8rem; color: var(--accent-blue); font-weight: 500; }
+.progress-track { width: 100%; height: 4px; background-color: var(--border-color); border-radius: 2px; margin-bottom: 0.5rem; }
+.progress-fill { width: 0%; height: 100%; background-color: var(--text-main); border-radius: 2px; transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.hover-details { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; max-height: 0; opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease; }
+.skill-card:hover .hover-details { max-height: 80px; opacity: 1; margin-top: 0.75rem; }
+
+/* Tools & Logo */
+.tools-container { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+.tool-logo { padding: 0.8rem 1.8rem; background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: var(--transition-smooth); }
+.tool-logo:hover { color: var(--text-main); border-color: var(--text-main); transform: scale(1.05); }
+
+/* Studi Kasus */
+.case-study-box { background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+.case-banner { display: flex; flex-direction: column; }
+.mock-image { width: 100%; height: 350px; background-color: #18181c; display: flex; justify-content: center; align-items: center; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
+.case-meta { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 1.5rem 2.5rem; background-color: rgba(0, 0, 0, 0.2); font-size: 0.9rem; gap: 1rem; color: var(--text-muted); }
+.case-meta strong { color: var(--text-main); }
+.case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; padding: 3rem 2.5rem; }
+.case-block h4 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent-blue); font-weight: 600; }
+.case-block p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* Linimasa / Timeline */
+.timeline-wrapper { position: relative; max-width: 800px; margin: 0 auto; padding: 2rem 0; }
+.timeline-line { position: absolute; top: 0; left: 20px; width: 2px; height: 0%; background: linear-gradient(to bottom, var(--text-main), var(--border-color)); transition: height 1s ease-out; }
+.timeline-item { position: relative; padding-left: 60px; margin-bottom: 3.5rem; }
+.timeline-dot { position: absolute; left: 17px; top: 30px; width: 8px; height: 8px; background-color: var(--bg-dark); border: 2px solid var(--text-main); border-radius: 50%; z-index: 2; transition: background-color 0.3s; }
+.timeline-item:hover .timeline-dot { background-color: var(--accent-blue); }
+.time-date { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem; }
+
+/* Filter & Pencarian Proyek */
+.filter-controls { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; }
+.search-box input { width: 100%; max-width: 400px; padding: 1rem 1.2rem; background-color: var(--card-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); font-size: 0.95rem; outline: none; transition: var(--transition-smooth); }
+.search-box input:focus { border-color: var(--text-muted); }
+.filter-buttons { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.filter-btn { background-color: transparent; border: 1px solid var(--border-color); padding: 0.6rem 1.4rem; border-radius: 4px; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: var(--transition-smooth); }
+.filter-btn.active, .filter-btn:hover { background-color: var(--text-main); color: var(--bg-dark); border-color: var(--text-main); }
+
+.project-display-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+.project-item { display: none; opacity: 0; transform: scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; }
+.project-item.active { display: block; opacity: 1; transform: scale(1); }
+.proj-card { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 2.5rem 2rem; border-radius: 8px; height: 100%; transition: var(--transition-smooth); }
+.proj-card:hover { border-color: var(--text-muted); }
+.proj-tag { font-size: 0.75rem; font-weight: 600; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 1rem; letter-spacing: 0.05em; }
+.proj-card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--text-main); }
+.proj-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+
+.fun-pill { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; text-align: center; font-size: 0.95rem; transition: var(--transition-smooth); }
+.fun-pill:hover { transform: translateY(-3px); border-color: var(--text-muted); }
+
+/* CTA & Footer */
+.cta-section { padding-bottom: 3rem; }
+.cta-container { max-width: 700px; margin: 0 auto; text-align: center; margin-bottom: 6rem; }
+.cta-container h2 { font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.03em; color: var(--text-main); }
+.cta-container p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem; }
+.main-footer { border-top: 1px solid var(--border-color); padding-top: 2rem; text-align: center; }
+.main-footer p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Animasi Observers */
+.scroll-anim { opacity: 0; transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.anim-up { transform: translateY(50px); }
+.anim-left { transform: translateX(-50px); }
+.anim-right { transform: translateX(50px); }
+.scroll-anim.revealed { opacity: 1; transform: translate(0); }
+
+/* ==========================================================================
+   6. RESPONSIVE COMPLIANCE (MOBILE OPTIMIZATION)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+    .hero-content p { margin: 0 auto 2.5rem auto; }
+    .hero-visual { order: -1; height: 450px; }
+    .workspace-3d { max-width: 320px; height: 320px; }
+    .glass-backdrop { width: 240px; height: 240px; }
+    .profile-avatar-premium { width: 100px; height: 100px; font-size: 1.1rem; }
+    
+    /* Penataan mobile yang aman agar kartu tidak keluar dari viewport */
+    .pos-card-1 .tech-card { top: -10%; left: 30%; }
+    .pos-card-2 .tech-card { top: 15%; left: -25%; }
+    .pos-card-3 .tech-card { top: 15%; right: -25%; }
+    .pos-card-4 .tech-card { top: 45%; right: -35%; }
+    .pos-card-5 .tech-card { top: 45%; left: -35%; }
+    .pos-card-6 .tech-card { bottom: 15%; left: -25%; }
+    .pos-card-7 .tech-card { bottom: -10%; left: 10%; }
+    .pos-card-8 .tech-card { top: 70%; right: -30%; }
+    .pos-card-9 .tech-card { bottom: 15%; right: -25%; }
+    .pos-card-10 .tech-card { bottom: -10%; right: 10%; }
+    .pos-card-11 .tech-card { top: -10%; left: -10%; }
+    .pos-card-12 .tech-card { top: 70%; left: -30%; }
+    
+    .nav-links { display: none; }
+    section { padding: 5rem 5%; }
+    .hero-content h1 { font-size: 2.8rem; }
+}
