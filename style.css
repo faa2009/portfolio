@@ -438,4 +438,84 @@ section { padding: 8rem 8%; }
     .nav-links { display: none; }
     section { padding: 5rem 5%; }
     .hero-content h1 { font-size: 2.8rem; }
+}/* ==========================================================================
+   BINGKAI BROWSER MAKARIOS AUTOMATIC (KASUS NUSANTARA STAY)
+   ========================================================================== */
+.premium-browser-mockup {
+    width: 100%;
+    background-color: #16161a;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.browser-header {
+    height: 40px;
+    background-color: #121214;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.browser-dots {
+    display: flex;
+    gap: 6px;
+    position: absolute;
+    left: 1.5rem;
+}
+
+.browser-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.browser-dots .red { background-color: #ff5f56; }
+.browser-dots .yellow { background-color: #ffbd2e; }
+.browser-dots .green { background-color: #27c93f; }
+
+.browser-address {
+    margin: 0 auto;
+    background-color: #1c1c1f;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 0.2rem 4rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* Modifikasi ulang kelas .mock-image agar berfungsi sebagai frame scrollable */
+.mock-image {
+    width: 100%;
+    height: 450px; /* Tinggi maksimal bingkai browser di web */
+    overflow-y: auto; /* Memungkinkan gambar desain figma kamu di-scroll ke bawah secara mandiri */
+    background-color: #070708;
+    border-bottom: none;
+    display: block;
+}
+
+.mock-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Kustomisasi scrollbar internal di dalam bingkai agar tetap estetik minimalis */
+.mock-image::-webkit-scrollbar {
+    width: 6px;
+}
+.mock-image::-webkit-scrollbar-track {
+    background: transparent;
+}
+.mock-image::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+.mock-image::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
