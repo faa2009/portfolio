@@ -521,21 +521,14 @@ section { padding: 8rem 8%; }
 }
 
 /* ==========================================================================
-   PERBAIKAN TECH STACK MODERN (VERCEL & SHADCN CLEAN STYLE)
+   UI IMPROVEMENT: TECH STACK MODERN (VERCEL, LINEAR, & SHADCN STYLE)
    ========================================================================== */
 #tools {
-    padding: 100px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.tech-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    box-sizing: border-box;
+    padding: 100px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
 }
 
 .section-subtitle {
@@ -547,45 +540,62 @@ section { padding: 8rem 8%; }
     text-align: center;
 }
 
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 45px;
-    width: 100%;
+/* Memaksa kontainer grid bawaan menjadi teratur simetris */
+#tools .tools-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 50px auto 0 auto !important;
+    padding: 0 2rem !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    height: auto !important;
 }
 
 @media (min-width: 640px) {
-    .tech-grid {
-        grid-template-columns: repeat(3, 1fr);
+    #tools .tools-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
 @media (min-width: 1024px) {
-    .tech-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
+    #tools .tools-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
     }
 }
 
-.tech-card {
-    background-color: #111113;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: left;
+/* Meremajakan tampilan dalam card tanpa merusak tata letak luar */
+#tools .tool-card {
+    background-color: #111113 !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    border-radius: 18px !important;
+    padding: 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: left !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
                 border-color 0.3s ease, 
-                box-shadow 0.3s ease;
+                box-shadow 0.3s ease !important;
 }
 
-.tech-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+/* Hover Efek Premium: Clean & Minimalist */
+#tools .tool-card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3) !important;
 }
 
 .tech-card-header {
