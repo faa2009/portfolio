@@ -524,11 +524,16 @@ section { padding: 8rem 8%; }
    UI IMPROVEMENT: TECH STACK MODERN (VERCEL, LINEAR, & SHADCN STYLE)
    ========================================================================== */
 #tools {
-    padding: 100px 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
+    padding: 80px 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+#tools .section-header {
+    margin-bottom: 25px !important;
+    text-align: center !important;
 }
 
 .section-subtitle {
@@ -540,34 +545,38 @@ section { padding: 8rem 8%; }
     text-align: center;
 }
 
-/* Memaksa kontainer grid bawaan menjadi teratur simetris */
+/* Menjinakkan wrapper utama agar kembali ke alur normal grid */
 #tools .tools-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Mobile */
     gap: 16px !important;
     width: 100% !important;
     max-width: 1200px !important;
-    margin: 50px auto 0 auto !important;
+    margin: 30px auto 0 auto !important; /* Jarak pas & aman dari subtitle */
     padding: 0 2rem !important;
     box-sizing: border-box !important;
     position: relative !important;
     height: auto !important;
+    min-height: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
 }
 
 @media (min-width: 640px) {
     #tools .tools-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: repeat(3, 1fr) !important; /* Tablet */
     }
 }
 
 @media (min-width: 1024px) {
     #tools .tools-grid {
-        grid-template-columns: repeat(4, 1fr) !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* Desktop */
         gap: 20px !important;
     }
 }
 
-/* Meremajakan tampilan dalam card tanpa merusak tata letak luar */
+/* Mengunci style card dalam agar seragam bergaya premium */
 #tools .tool-card {
     background-color: #111113 !important;
     border: 1px solid rgba(255, 255, 255, 0.07) !important;
@@ -578,6 +587,7 @@ section { padding: 8rem 8%; }
     gap: 12px !important;
     text-align: left !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    box-sizing: border-box !important;
     position: relative !important;
     top: auto !important;
     left: auto !important;
@@ -591,7 +601,6 @@ section { padding: 8rem 8%; }
                 box-shadow 0.3s ease !important;
 }
 
-/* Hover Efek Premium: Clean & Minimalist */
 #tools .tool-card:hover {
     transform: translateY(-4px) !important;
     border-color: rgba(255, 255, 255, 0.18) !important;
