@@ -642,3 +642,32 @@ section { padding: 8rem 8%; }
     line-height: 1.4;
     margin: 0;
 }
+
+/* ==========================================================================
+   AVATAR HERO ULTRA-MINIMALIS (SHADCN / VERCEL INSPIRED)
+   ========================================================================== */
+.hero-avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 150px;  /* Ukuran pas, tidak kebesaran dan dominan */
+    height: 150px;
+}
+
+.hero-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Bulat sempurna */
+    object-fit: cover;  /* Foto tidak gepeng */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Garis batas tipis kelabu gelap */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow gelap natural */
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.3s ease;
+}
+
+/* Interaksi hover yang sangat dewasa dan tenang */
+.hero-avatar-img:hover {
+    transform: translateY(-2px); /* Hanya naik sedikit secara anggun */
+    border-color: rgba(255, 255, 255, 0.25); /* Garis batas menjadi sedikit lebih tegas */
+}
