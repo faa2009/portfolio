@@ -683,3 +683,61 @@ section { padding: 8rem 8%; }
     transform: scale(1.05) !important; /* Membesar sedikit secara halus */
     border-color: rgba(255, 255, 255, 0.3) !important;
 }
+
+/* ==========================================================================
+   HERO BUTTONS ACTIONS (PREMIUM MINIMALIST HIERARCHY)
+   ========================================================================== */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+/* Tombol Utama (Hubungi Saya) */
+.btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+/* Tombol Pendamping (Unduh CV) */
+.btn-secondary {
+    background-color: transparent;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Jarak antara ikon dan teks */
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-secondary hover-target {
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Efek highlight tipis */
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-secondary i {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
